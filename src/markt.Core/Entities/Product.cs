@@ -8,7 +8,9 @@ namespace markt.Core.Entities
         public string Title { get; set; }
         public double Price { get; set; }
         public int CategoryId { get; set; }
-        public ICategory Category { get; set; }
+        public Category Category { get; set; }
+
+        protected Product() {}
 
         public Product(string _title, double _price, Category _cat)
         {

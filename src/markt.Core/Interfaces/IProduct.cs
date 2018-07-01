@@ -1,3 +1,5 @@
+using markt.Core.Entities;
+
 namespace markt.Core.Interfaces
 {
     public interface IProduct
@@ -6,6 +8,6 @@ namespace markt.Core.Interfaces
         string Title { get; set; }
         double Price { get; set; }
         int CategoryId { get; set; }
-        ICategory Category { get; set; }
+        Category Category { get; set; }
     }
 }

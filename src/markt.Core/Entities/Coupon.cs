@@ -10,6 +10,8 @@ namespace markt.Core.Entities
         public double DiscountValue { get; set; }
         public DiscountType DiscountType { get; set; }
 
+        protected Coupon() {}
+
         public Coupon(double _amount, double _value, DiscountType _type)
         {
             MinimumAmount = _amount;

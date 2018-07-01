@@ -9,34 +9,52 @@ namespace markt.Core.Entities
     {
         public int CartId { get; set; }
         public double CartPrice { get; set; }
-        public ICollection<IProduct> Products { get; set; }
-        public ICollection<ICampaign> Campaigns { get; set; }
-        public ICollection<ICoupon> Coupons { get; set; }
+        public ICollection<CartProducts> Products { get; set; }
+        public ICollection<CartCampaigns> Campaigns { get; set; }
+        public ICollection<CartCoupons> Coupons { get; set; }
 
         public ShoppingCart()
         {
-            Products = new List<IProduct>();
-            Campaigns = new List<ICampaign>();
-            Coupons = new List<ICoupon>();
+            Products = new List<CartProducts>();
+            Campaigns = new List<CartCampaigns>();
+            Coupons = new List<CartCoupons>();
             CartPrice = 0;
         }
         public void AddItem(Product _product)
         {
-            Products.Add(_product);
+            CartProducts cp = new CartProducts();
+            cp.CartId = this.CartId;
+            cp.Cart = this;
+            cp.Product = _product;
+            cp.ProductId = _product.ProductId;
+
+            Products.Add(cp);
             CartPrice += _product.Price;
         }
 
-        public void applyDiscounts(params ICampaign[] campaigns)
+        public void applyDiscounts(params Campaign[] campaigns)
         {
             foreach(var item in campaigns)
             {
-                Campaigns.Add(item);
+                CartCampaigns cc = new CartCampaigns();
+                cc.CartId = this.CartId;
+                cc.Cart = this;
+                cc.Campaign = item;
+                cc.CampaignId = item.CampaignId;
+
+                Campaigns.Add(cc);
             }
         }
 
-        public void applyCoupon(ICoupon coupon)
+        public void applyCoupon(Coupon coupon)
         {
-            Coupons.Add(coupon);
+            CartCoupons cc = new CartCoupons();
+            cc.Cart = this;
+            cc.CartId = this.CartId;
+            cc.Coupon = coupon;
+            cc.CouponId = coupon.CouponId;
+
+            Coupons.Add(cc);
         }
 
         public double getTotalAmountAfterDiscounts()
@@ -52,14 +70,14 @@ namespace markt.Core.Entities
 
             foreach(var coupon in Coupons)
             {
-                if (CartPrice >= coupon.MinimumAmount)
+                if (CartPrice >= coupon.Coupon.MinimumAmount)
                 {
-                    if (coupon.DiscountType == DiscountType.Amount)
+                    if (coupon.Coupon.DiscountType == DiscountType.Amount)
                     {
-                        couponDiscount += coupon.DiscountValue;
+                        couponDiscount += coupon.Coupon.DiscountValue;
                     }
                     else {
-                        couponDiscount += CartPrice * coupon.DiscountValue;
+                        couponDiscount += CartPrice * coupon.Coupon.DiscountValue;
                     }
                 }
             }
@@ -73,17 +91,17 @@ namespace markt.Core.Entities
 
             foreach(var campaign in Campaigns)
             {
-                int campCatCount = Products.Count(x => x.Category.Equals(campaign.Category));
-                double campCatValue = Products.Where(x => x.Category.Equals(campaign.Category)).Sum(x => x.Price);
+                int campCatCount = Products.Count(x => x.Product.Category.Equals(campaign.Campaign.Category));
+                double campCatValue = Products.Where(x => x.Product.Category.Equals(campaign.Campaign.Category)).Sum(x => x.Product.Price);
 
-                if (campCatCount >= campaign.MinimumCount)
+                if (campCatCount >= campaign.Campaign.MinimumCount)
                 {
-                    if(campaign.DiscountType == DiscountType.Amount)
+                    if(campaign.Campaign.DiscountType == DiscountType.Amount)
                     {
-                        campaignDiscount += campaign.DiscountValue;
+                        campaignDiscount += campaign.Campaign.DiscountValue;
                     }
                     else {
-                        campaignDiscount += campCatValue * campaign.DiscountValue;
+                        campaignDiscount += campCatValue * campaign.Campaign.DiscountValue;
                     }
                 }
             }

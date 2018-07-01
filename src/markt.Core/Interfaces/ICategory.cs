@@ -1,3 +1,5 @@
+using markt.Core.Entities;
+
 namespace markt.Core.Interfaces
 {
     public interface ICategory
@@ -5,6 +7,6 @@ namespace markt.Core.Interfaces
         int CategoryId { get; set; }
         string Title { get; set; }
         int ParentCategoryId { get; set; }
-        ICategory ParentCateory { get; set; }
+        Category ParentCategory { get; set; }
     }
 }

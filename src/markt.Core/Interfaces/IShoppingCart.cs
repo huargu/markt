@@ -1,15 +1,16 @@
 using System.Collections.Generic;
+using markt.Core.Entities;
 
 namespace markt.Core.Interfaces
 {
     public interface IShoppingCart
     {   
         int CartId { get; set; }
-        ICollection<IProduct> Products { get; set; }
-        ICollection<ICampaign> Campaigns { get; set; }
-        ICollection<ICoupon> Coupons { get; set; }
-        void applyDiscounts(params ICampaign[] campaigns);
-        void applyCoupon(ICoupon coupon);
+        ICollection<CartProducts> Products { get; set; }
+        ICollection<CartCampaigns> Campaigns { get; set; }
+        ICollection<CartCoupons> Coupons { get; set; }
+        void applyDiscounts(params Campaign[] campaigns);
+        void applyCoupon(Coupon coupon);
         double getTotalAmountAfterDiscounts();
         double getCouponDiscount();
         double getCampaignDiscount();

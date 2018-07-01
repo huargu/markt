@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{28114BF3-66A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "markt.Core", "src\markt.Core\markt.Core.csproj", "{27104A94-BDBD-40B4-8D89-7A5464E6482B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "markt.Api", "src\markt.Api\markt.Api.csproj", "{5B643731-F6CB-4695-BB4C-841A16838DCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +34,21 @@ Global
 		{27104A94-BDBD-40B4-8D89-7A5464E6482B}.Release|x64.Build.0 = Release|Any CPU
 		{27104A94-BDBD-40B4-8D89-7A5464E6482B}.Release|x86.ActiveCfg = Release|Any CPU
 		{27104A94-BDBD-40B4-8D89-7A5464E6482B}.Release|x86.Build.0 = Release|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Debug|x64.Build.0 = Debug|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Debug|x86.Build.0 = Debug|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Release|x64.ActiveCfg = Release|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Release|x64.Build.0 = Release|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Release|x86.ActiveCfg = Release|Any CPU
+		{5B643731-F6CB-4695-BB4C-841A16838DCE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{27104A94-BDBD-40B4-8D89-7A5464E6482B} = {28114BF3-66A3-427C-8254-EEFFF10ED061}
+		{5B643731-F6CB-4695-BB4C-841A16838DCE} = {28114BF3-66A3-427C-8254-EEFFF10ED061}
 	EndGlobalSection
 EndGlobal
