@@ -11,9 +11,9 @@ namespace markt.Api.Controllers
     [Route("api/campaign")]
     public class CampaignController: Controller
     {
-        private readonly CampaignRepository _repo;
+        private readonly ICampaignRepository _repo;
         private readonly IMapper _mapper;
-        public CampaignController(CampaignRepository repo, IMapper mapper)
+        public CampaignController(ICampaignRepository repo, IMapper mapper)
         {
             this._mapper = mapper;
             this._repo = repo;

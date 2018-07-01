@@ -11,9 +11,9 @@ namespace markt.Api.Controllers
     [Route("api/cart")]
     public class CartController : Controller
     {
-        private readonly CartRepository _repo;
+        private readonly ICartRepository _repo;
         private readonly IMapper _mapper;
-        public CartController(CartRepository repo, IMapper mapper)
+        public CartController(ICartRepository repo, IMapper mapper)
         {
             this._mapper = mapper;
             this._repo = repo;

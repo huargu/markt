@@ -80,7 +80,7 @@ namespace markt.Api.Database.Migrations
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ParentCategoryId");
+                    b.Property<int?>("ParentCategoryId");
 
                     b.Property<string>("Title");
 
@@ -204,8 +204,7 @@ namespace markt.Api.Database.Migrations
                 {
                     b.HasOne("markt.Core.Entities.Category", "ParentCategory")
                         .WithMany()
-                        .HasForeignKey("ParentCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentCategoryId");
                 });
 
             modelBuilder.Entity("markt.Core.Entities.CategoryProducts", b =>

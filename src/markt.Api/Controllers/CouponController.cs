@@ -11,9 +11,9 @@ namespace markt.Api.Controllers
     [Route("api/coupon")]
     public class CouponController: Controller
     {
-        private readonly CouponRepository _repo;
+        private readonly ICouponRepository _repo;
         private readonly IMapper _mapper;
-        public CouponController(CouponRepository repo, IMapper mapper)
+        public CouponController(ICouponRepository repo, IMapper mapper)
         {
             this._mapper = mapper;
             this._repo = repo;

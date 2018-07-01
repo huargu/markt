@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace markt.Api.Database.Repositories
 {
-    public class CouponRepository
+    public class CouponRepository : ICouponRepository
     {
         private readonly DataContext _context;
         public CouponRepository(DataContext context)

@@ -11,9 +11,9 @@ namespace markt.Api.Controllers
     [Route("api/category")]
     public class CategoryController : Controller
     {
-        private readonly CategoryRepository _repo;
+        private readonly ICategoryRepository _repo;
         private readonly IMapper _mapper;
-        public CategoryController(CategoryRepository repo, IMapper mapper)
+        public CategoryController(ICategoryRepository repo, IMapper mapper)
         {
             this._mapper = mapper;
             this._repo = repo;

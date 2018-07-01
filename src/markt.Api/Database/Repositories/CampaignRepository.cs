@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace markt.Api.Database.Repositories
 {
-    public class CampaignRepository
+    public class CampaignRepository : ICampaignRepository
     {
         private readonly DataContext _context;
         public CampaignRepository(DataContext context)

@@ -2,7 +2,7 @@
 
 namespace markt.Api.Database.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialMigrationAgain : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,7 +26,7 @@ namespace markt.Api.Database.Migrations
                     CategoryId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(nullable: true),
-                    ParentCategoryId = table.Column<int>(nullable: false)
+                    ParentCategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,7 +36,7 @@ namespace markt.Api.Database.Migrations
                         column: x => x.ParentCategoryId,
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,6 +169,31 @@ namespace markt.Api.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CategoryProducts",
+                columns: table => new
+                {
+                    CategoryId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false),
+                    ProductId1 = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryProducts", x => new { x.CategoryId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_CategoryProducts_Categories_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CategoryProducts_Products_ProductId1",
+                        column: x => x.ProductId1,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Campaigns_CategoryId",
                 table: "Campaigns",
@@ -195,6 +220,16 @@ namespace markt.Api.Database.Migrations
                 column: "ParentCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CategoryProducts_ProductId",
+                table: "CategoryProducts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryProducts_ProductId1",
+                table: "CategoryProducts",
+                column: "ProductId1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
@@ -210,6 +245,9 @@ namespace markt.Api.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "CartProducts");
+
+            migrationBuilder.DropTable(
+                name: "CategoryProducts");
 
             migrationBuilder.DropTable(
                 name: "Campaigns");

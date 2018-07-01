@@ -11,9 +11,9 @@ namespace markt.Api.Controllers
     [Route("api/product")]
     public class ProductController : Controller
     {
-        private readonly ProductRepository _repo;
+        private readonly IProductRepository _repo;
         private readonly IMapper _mapper;
-        public ProductController(ProductRepository repo, IMapper mapper)
+        public ProductController(IProductRepository repo, IMapper mapper)
         {
             this._mapper = mapper;
             this._repo = repo;

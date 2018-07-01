@@ -12,6 +12,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using AutoMapper;
+using Swashbuckle.AspNetCore.Swagger;
+using markt.Api.Database.Repositories;
 
 namespace markt.Api
 {
@@ -28,7 +31,18 @@ namespace markt.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DatabaseConnection")));
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>()
+;           services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICouponRepository, CouponRepository>();
+            services.AddScoped<ICampaignRepository, CampaignRepository>();
+            services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Markt Api", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +59,11 @@ namespace markt.Api
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Markt Api");
+                });
         }
     }
 }

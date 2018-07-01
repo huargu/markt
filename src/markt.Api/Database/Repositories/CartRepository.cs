@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace markt.Api.Database.Repositories
 {
-    public class CartRepository
+    public class CartRepository : ICartRepository
     {
         private readonly DataContext _context;
         public CartRepository(DataContext context)

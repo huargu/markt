@@ -9,8 +9,8 @@ using markt.Api.Database;
 namespace markt.Api.Database.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180701165652_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20180701184109_InitialMigrationAgain")]
+    partial class InitialMigrationAgain
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,7 +82,7 @@ namespace markt.Api.Database.Migrations
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ParentCategoryId");
+                    b.Property<int?>("ParentCategoryId");
 
                     b.Property<string>("Title");
 
@@ -91,6 +91,23 @@ namespace markt.Api.Database.Migrations
                     b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("markt.Core.Entities.CategoryProducts", b =>
+                {
+                    b.Property<int>("CategoryId");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int?>("ProductId1");
+
+                    b.HasKey("CategoryId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("ProductId1");
+
+                    b.ToTable("CategoryProducts");
                 });
 
             modelBuilder.Entity("markt.Core.Entities.Coupon", b =>
@@ -189,8 +206,19 @@ namespace markt.Api.Database.Migrations
                 {
                     b.HasOne("markt.Core.Entities.Category", "ParentCategory")
                         .WithMany()
-                        .HasForeignKey("ParentCategoryId")
+                        .HasForeignKey("ParentCategoryId");
+                });
+
+            modelBuilder.Entity("markt.Core.Entities.CategoryProducts", b =>
+                {
+                    b.HasOne("markt.Core.Entities.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("markt.Core.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId1");
                 });
 
             modelBuilder.Entity("markt.Core.Entities.Product", b =>
