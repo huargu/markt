@@ -12,6 +12,11 @@ namespace markt.Api.Database.Repositories
         {
             this._context = context;
         }
+
+        public async void Add(ShoppingCart cart)
+        {
+            await _context.Carts.AddAsync(cart);
+        }
         
         public async Task<ShoppingCart> GetCart(int id)
         {

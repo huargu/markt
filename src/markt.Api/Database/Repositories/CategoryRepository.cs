@@ -42,5 +42,15 @@ namespace markt.Api.Database.Repositories
             
             return cat;
         }
+
+        public async Task<IEnumerable<Product>> GetProductsOfCategory(int categoryId)
+        {
+            var products = await _context.Products
+                .Where(p => p.CategoryId == categoryId)
+                .Include(c => c.Category)
+                .ToListAsync();
+
+            return products;
+        }
     }
 }

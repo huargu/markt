@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using markt.Core.Interfaces;
 
 namespace markt.Core.Entities
@@ -8,7 +9,8 @@ namespace markt.Core.Entities
         public string Title { get; set; }
         public int ParentCategoryId { get; set; }
         public Category ParentCategory { get; set; }
-        
+        public ICollection<CategoryProducts> Products { get; set; }
+
         protected Category() {}
 
         public Category(string _title)

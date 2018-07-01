@@ -16,9 +16,11 @@ namespace markt.Api.Database
         public DbSet<Product> Products { get; set; }
         public DbSet<ShoppingCart> Carts { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
         public DbSet<CartProducts> CartProducts { get; set; }
         public DbSet<CartCampaigns> CartCampaigns { get; set; }
         public DbSet<CartCoupons> CartCoupons { get; set; }
+        public DbSet<CategoryProducts> CategoryProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -30,6 +32,7 @@ namespace markt.Api.Database
             builder.ApplyConfiguration(new CartProductsEntityConfiguration());
             builder.ApplyConfiguration(new CartCampaignsEntityConfiguration());
             builder.ApplyConfiguration(new CartCouponsEntityConfiguration());
+            builder.ApplyConfiguration(new CategoryProductsEntityConfiguration());
         }
     }
 }
