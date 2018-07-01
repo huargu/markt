@@ -42,5 +42,9 @@ namespace markt.Api.Database.Repositories
             
             return product;
         }
+        public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }

@@ -30,8 +30,14 @@ namespace markt.Api.Database.Repositories
                 .ThenInclude(ct => ct.Product)
                 .ThenInclude(p => p.Category)
                 .FirstOrDefaultAsync();
+
+            cart.CartPrice = cart.getTotalAmountAfterDiscounts();
             
             return cart;
+        }
+        public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
